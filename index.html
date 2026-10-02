@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Quantifier-30 Calculator — ATC Theme Demo</title>
+<link rel="stylesheet" href="css/theme-vars.css">
+<link rel="stylesheet" href="css/calculator.css">
+<link rel="stylesheet" href="css/colorizer.css">
+<style>
+  /* Demo page chrome (consumer can replace) */
+  html, body {
+    margin: 0;
+    min-height: 100%;
+    background: var(--col-bg-main);
+    color: var(--col-text-main);
+    font-family: 'Segoe UI', Arial, sans-serif;
+    opacity: 1;
+  }
+  .demo-banner {
+    position: fixed;
+    top: 18px;
+    left: 24px;
+    z-index: 50;
+    text-align: left;
+    max-width: 420px;
+    pointer-events: none;
+  }
+  .demo-banner h1 {
+    margin: 0 0 6px;
+    font-size: 1.15em;
+    color: var(--accent-0);
+    letter-spacing: 1px;
+    text-shadow: 0 0 12px rgba(var(--accent-0-rgb), 0.45);
+  }
+  .demo-banner p {
+    margin: 0;
+    font-size: 0.85em;
+    color: var(--col-text-muted);
+    line-height: 1.4;
+  }
+  .demo-banner code {
+    color: var(--accent-1);
+    font-size: 0.92em;
+  }
+  .settings-icon { display: inline-block; line-height: 1; }
+</style>
+</head>
+<body>
+<div class="demo-banner">
+  <h1>Quantifier-30 · ATC Math Calculator</h1>
+  <p>Standalone package demo with full ATC theme, colorizer, particle field, and calculator canvas overlays (<code>mix-blend-mode: screen</code>). Open ⚙ to retheme.</p>
+</div>
+
+<div class="settings-wrapper" id="settings-wrapper">
+  <button class="settings-btn" id="settings-btn" title="Theme / Colorizer" aria-label="Open theme settings">
+    <span class="settings-icon">⚙</span>
+  </button>
+</div>
+
+<div id="settings-modal" class="settings-modal">
+  <div class="settings-modal-content">
+    <div class="settings-modal-header">
+      <h2>Colorizer</h2>
+      <button class="settings-close-modal" id="settings-close-btn" aria-label="Close">×</button>
+    </div>
+    <div class="settings-body">
+      <div class="settings-nav">
+        <button class="settings-nav-btn active" data-panel="general" onclick="openSettingsPanel('general')">Theme</button>
+      </div>
+      <div class="settings-panels">
+        <div class="settings-panel active" id="settings-panel-general">
+          <div class="settings-panel-title">Theme</div>
+<div class="setting-item" style="padding-top:20px; position:relative;">
+<div style="font-size:0.75em; font-weight:bold; color:var(--col-text-muted); letter-spacing:1.5px; text-transform:uppercase; margin-bottom:16px; opacity:0.6;">Theme</div>
+<button title="Reset Theme to Defaults" onclick="resetThemeToDefaults()" style="position:absolute; top:20px; right:0; background:transparent; border:1px solid var(--col-error); color:var(--col-error); border-radius:6px; padding:3px 8px; font-size:0.8em; ">↺</button>
+<span class="setting-item-label">Accent Color</span>
+<div style="display:flex; align-items:center; gap:14px; flex-wrap:wrap;">
+<div class="preset-swatches" style="margin:0; flex-shrink:0;">
+<button class="preset-swatch" data-hex="#00bbcc" style="background:#00bbcc;" title="Cyan" onclick="applyPreset('#00bbcc', false)"></button>
+<button class="preset-swatch" data-hex="#8833ff" style="background:#8833ff;" title="Violet" onclick="applyPreset('#8833ff', false, 32)"></button>
+<button class="preset-swatch" data-hex="#000000" style="background:#000000;" title="Obsidian" onclick="applyPreset('#000000', false, 90)"></button>
+<button class="preset-swatch" data-hex="#ff8800" style="background:#ff8800;" title="Amber" onclick="applyPreset('#ff8800', false)"></button>
+<button class="preset-swatch" data-hex="#ff0000" style="background:#ff0000;" title="Red" onclick="applyPreset('#ff0000', false, 32)"></button>
+</div>
+<div id="custom-presets-area" style="display:flex;gap:6px;align-items:center;"></div>
+<div id="theme-lock-colorPicker" style="display:flex; gap:8px; align-items:center; margin-left:auto;">
+<input type="color" id="accent-color-picker" value="#FF8800" style="width:40px;height:40px;border:none;border-radius:8px;flex-shrink:0;">
+<input type="text" id="accent-hex-input" value="#FF8800" maxlength="7" class="number-input" style="width:100px; font-family:monospace; font-size:0.85em;">
+</div>
+</div>
+</div>
+<div class="setting-item" id="theme-lock-colorStrength" style="border-top:1px solid var(--col-border-light); padding-top:20px;">
+<span class="setting-item-label">Color Strength: <span id="strength-value-display" style="color:var(--accent-0);">64</span></span>
+<div style="display:flex; gap:10px; align-items:center;">
+<span style="font-size:0.82em; color:var(--col-text-muted);">Subtle</span>
+<input type="range" id="accent-strength-slider" min="0" max="100" value="64" style="flex:1; ">
+<span style="font-size:0.82em; color:var(--col-text-muted);">Vibrant</span>
+</div>
+</div>
+<div class="setting-item" style="border-top:1px solid var(--col-border-light); padding-top:20px; display:none;">
+<span class="setting-item-label">Reset Theme</span>
+<button class="btn btn-secondary" style="border-color:var(--col-error); color:var(--col-error);" onclick="resetThemeToDefaults()">Reset Theme to Defaults</button>
+<p class="setting-item-desc">Resets accent color, hue shift, and dark mode.</p>
+</div>
+<div class="setting-item" style="display: none;">
+<span class="setting-item-label">Appearance</span>
+<div class="toggle-container" style="margin:0; justify-content:flex-start;">
+<span class="toggle-label">Dark</span>
+<label class="toggle-switch">
+<input type="checkbox" id="light-mode-toggle">
+<span class="toggle-slider"></span>
+</label>
+<span class="toggle-label">Light</span>
+</div>
+</div>
+
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div id="calculator-widget" style="display:block;position:fixed;top:70px;right:30px;z-index:9998;cursor:grab;" onmousedown="startDragCalc(event)" ontouchstart="startDragCalcTouch(event)">
+<div class="calc-wrapper" id="calcWrapper">
+<div class="info-popup" id="infoPopup">
+<button class="info-close" id="infoClose">✕</button>
+<p>Button layout mimics the TI-30XS series to match PearsonVue's layout.</p>
+</div>
+<div class="calc-body" id="calcBody">
+<canvas id="calcCosmicCanvas" style="position:absolute;inset:0;width:100%;height:100%;border-radius:inherit;pointer-events:none;opacity:0.45;z-index:0;"></canvas>
+<div class="calc-header" style="position:relative;z-index:1;">
+<button class="info-btn" id="infoBtnEl" title="About this layout">i</button>
+<span class="brand-name">Quantifier-30</span>
+<div class="solar-panel"><canvas class="calc-theme-overlay" id="calcOverlaySolar"></canvas></div>
+</div>
+<div class="calc-display" id="calcDisplay">
+<canvas class="calc-theme-overlay" id="calcOverlayDisplay"></canvas>
+<div class="display-scanlines"></div>
+<div class="display-status">
+<div class="display-status-left">
+<span id="dspAngle" class="stat-pill">DEG</span>
+<span id="dspHyp" class="stat-pill" style="display:none">HYP</span>
+<span id="dsp2nd" class="stat-pill" style="display:none">2ND</span>
+</div>
+<div class="display-status-right">
+<span id="dspMem" style="display:none;font-size:8.5px;opacity:.8">M</span>
+<span id="dspIns" class="stat-pill" style="display:none">OVR</span>
+<span id="dspNav">↑↓</span>
+</div>
+</div>
+<div class="display-expr" id="dspExpr"><span></span></div>
+<div class="display-main" id="dspMain"><span><span class="blk-cursor">█</span></span></div>
+<div id="errMsg"></div>
+</div>
+<div class="calc-buttons" id="btnArea">
+<div class="btn-top-section">
+<div class="btn-top-left">
+<div class="btn-row">
+<button class="calc-btn btn-2nd" id="btn2nd" data-id="2nd">2nd</button>
+<button class="calc-btn btn-fn" data-id="mode"><span class="lbl2">quit</span><span class="lbl-main">mode</span></button>
+<button class="calc-btn btn-fn" data-id="delete"><span class="lbl2">insert</span><span class="lbl-main">delete</span></button>
+</div>
+<div class="btn-row">
+<button class="calc-btn btn-fn" data-id="log"><span class="lbl2">10ˣ</span><span class="lbl-main">log</span></button>
+<button class="calc-btn btn-fn" data-id="prb"><span class="lbl2">angle</span><span class="lbl-main">prb</span></button>
+<button class="calc-btn btn-fn" data-id="data"><span class="lbl2">stat</span><span class="lbl-main">data</span></button>
+</div>
+</div>
+<div class="nav-pad-outer">
+<div class="nav-row"><button class="nav-btn nav-corner">/</button><button class="nav-btn nav-arr" data-nav="up">▲</button><button class="nav-btn nav-corner">\</button></div>
+<div class="nav-row"><button class="nav-btn nav-arr" data-nav="left">◀</button><button class="nav-btn nav-center" data-nav="center">●</button><button class="nav-btn nav-arr" data-nav="right">▶</button></div>
+<div class="nav-row"><button class="nav-btn nav-corner">\</button><button class="nav-btn nav-arr" data-nav="down">▼</button><button class="nav-btn nav-corner">/</button></div>
+</div>
+</div>
+<div class="btn-row-full">
+<button class="calc-btn btn-fn" data-id="ln"><span class="lbl2">eˣ</span><span class="lbl-main">ln</span></button>
+<button class="calc-btn btn-fn" data-id="nd"><span class="lbl2">Un/d</span><span class="lbl-main">n/d</span></button>
+<button class="calc-btn btn-fn" data-id="x10n"><span class="lbl2">U↔d</span><span class="lbl-main" style="font-size:11px">×10ⁿ</span></button>
+<button class="calc-btn btn-fn" data-id="table"><span class="lbl2">f↔d</span><span class="lbl-main">table</span></button>
+<button class="calc-btn btn-clear" data-id="clear">clear</button>
+</div>
+<div class="btn-main-grid">
+<button class="calc-btn btn-fn" data-id="pi"><span class="lbl2">hyp</span><span class="lbl-main">π</span></button>
+<button class="calc-btn btn-fn" data-id="sin"><span class="lbl2">sin⁻¹</span><span class="lbl-main">sin</span></button>
+<button class="calc-btn btn-fn" data-id="cos"><span class="lbl2">cos⁻¹</span><span class="lbl-main">cos</span></button>
+<button class="calc-btn btn-fn" data-id="tan"><span class="lbl2">tan⁻¹</span><span class="lbl-main">tan</span></button>
+<button class="calc-btn btn-op" data-id="div">÷</button>
+<button class="calc-btn btn-fn" data-id="power"><span class="lbl2">ˣ√</span><span class="lbl-main">^</span></button>
+<button class="calc-btn btn-fn" data-id="inv">x⁻¹</button>
+<button class="calc-btn btn-fn" data-id="lparen"><span class="lbl2">%</span><span class="lbl-main">(</span></button>
+<button class="calc-btn btn-fn" data-id="rparen">)</button>
+<button class="calc-btn btn-op" data-id="mul">×</button>
+<button class="calc-btn btn-fn" data-id="sqr"><span class="lbl2">√</span><span class="lbl-main">x²</span></button>
+<button class="calc-btn btn-num" data-id="7">7</button>
+<button class="calc-btn btn-num" data-id="8">8</button>
+<button class="calc-btn btn-num" data-id="9">9</button>
+<button class="calc-btn btn-op" data-id="sub">−</button>
+<button class="calc-btn btn-fn" data-id="xyz"><span class="lbl2">clv</span><span class="lbl-main">xyz</span></button>
+<button class="calc-btn btn-num" data-id="4">4</button>
+<button class="calc-btn btn-num" data-id="5">5</button>
+<button class="calc-btn btn-num" data-id="6">6</button>
+<button class="calc-btn btn-op" data-id="add">+</button>
+<button class="calc-btn btn-fn" data-id="sto"><span class="lbl2">rcl</span><span class="lbl-main">sto</span></button>
+<button class="calc-btn btn-num" data-id="1">1</button>
+<button class="calc-btn btn-num" data-id="2">2</button>
+<button class="calc-btn btn-num" data-id="3">3</button>
+<button class="calc-btn btn-fn" data-id="swap">⇆</button>
+<button class="calc-btn btn-on" data-id="on"><span class="lbl2" style="color:#FF9090">off</span><span class="lbl-main">on</span></button>
+<button class="calc-btn btn-num" data-id="0"><span class="lbl2" style="color:var(--label-y)">reset</span><span class="lbl-main">0</span></button>
+<button class="calc-btn btn-num" data-id="dot"><span class="lbl2">,</span><span class="lbl-main">.</span></button>
+<button class="calc-btn btn-fn" data-id="neg"><span class="lbl2">ans</span><span class="lbl-main">(-)</span></button>
+<button class="calc-btn btn-enter" data-id="enter">enter</button>
+</div>
+</div>
+</div>
+</div>
+</div>
+
+
+<script src="js/particles.js"></script>
+<script src="js/colorizer-theme.js"></script>
+<script src="js/calculator-core.js"></script>
+<script>
+  // Demo: ensure calc is active target + visible
+  (function () {
+    var w = document.getElementById('calculator-widget');
+    if (w) {
+      w.style.display = 'block';
+      w.classList.add('calc-target-active');
+      w.classList.remove('calc-inactive');
+    }
+    window.lastInputTarget = 'calc';
+  })();
+</script>
+</body>
+</html>

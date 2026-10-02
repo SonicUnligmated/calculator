@@ -1,0 +1,21 @@
+{
+  "name": "@atc/quantifier-calculator",
+  "version": "1.0.0",
+  "description": "Standalone Quantifier-30 calculator with ATC Math theme, colorizer, and canvas transparency overlays",
+  "private": true,
+  "main": "index.html",
+  "files": [
+    "index.html",
+    "css/",
+    "js/",
+    "assets/",
+    "README.md",
+    "FEATURE_CHECKLIST.md"
+  ],
+  "scripts": {
+    "start": "python3 -m http.server 8765",
+    "check": "node --check js/calculator-core.js && node --check js/particles.js && node --check js/colorizer-theme.js"
+  },
+  "keywords": ["calculator", "atc-math", "quantifier-30", "theme", "colorizer"],
+  "license": "UNLICENSED"
+}

@@ -1,0 +1,43 @@
+<div class="setting-item" style="padding-top:20px; position:relative;">
+<div style="font-size:0.75em; font-weight:bold; color:var(--col-text-muted); letter-spacing:1.5px; text-transform:uppercase; margin-bottom:16px; opacity:0.6;">Theme</div>
+<button title="Reset Theme to Defaults" onclick="resetThemeToDefaults()" style="position:absolute; top:20px; right:0; background:transparent; border:1px solid var(--col-error); color:var(--col-error); border-radius:6px; padding:3px 8px; font-size:0.8em; ">↺</button>
+<span class="setting-item-label">Accent Color</span>
+<div style="display:flex; align-items:center; gap:14px; flex-wrap:wrap;">
+<div class="preset-swatches" style="margin:0; flex-shrink:0;">
+<button class="preset-swatch" data-hex="#00bbcc" style="background:#00bbcc;" title="Cyan" onclick="applyPreset('#00bbcc', false)"></button>
+<button class="preset-swatch" data-hex="#8833ff" style="background:#8833ff;" title="Violet" onclick="applyPreset('#8833ff', false, 32)"></button>
+<button class="preset-swatch" data-hex="#000000" style="background:#000000;" title="Obsidian" onclick="applyPreset('#000000', false, 90)"></button>
+<button class="preset-swatch" data-hex="#ff8800" style="background:#ff8800;" title="Amber" onclick="applyPreset('#ff8800', false)"></button>
+<button class="preset-swatch" data-hex="#ff0000" style="background:#ff0000;" title="Red" onclick="applyPreset('#ff0000', false, 32)"></button>
+</div>
+<div id="custom-presets-area" style="display:flex;gap:6px;align-items:center;"></div>
+<div id="theme-lock-colorPicker" style="display:flex; gap:8px; align-items:center; margin-left:auto;">
+<input type="color" id="accent-color-picker" value="#FF8800" style="width:40px;height:40px;border:none;border-radius:8px;flex-shrink:0;">
+<input type="text" id="accent-hex-input" value="#FF8800" maxlength="7" class="number-input" style="width:100px; font-family:monospace; font-size:0.85em;">
+</div>
+</div>
+</div>
+<div class="setting-item" id="theme-lock-colorStrength" style="border-top:1px solid var(--col-border-light); padding-top:20px;">
+<span class="setting-item-label">Color Strength: <span id="strength-value-display" style="color:var(--accent-0);">64</span></span>
+<div style="display:flex; gap:10px; align-items:center;">
+<span style="font-size:0.82em; color:var(--col-text-muted);">Subtle</span>
+<input type="range" id="accent-strength-slider" min="0" max="100" value="64" style="flex:1; ">
+<span style="font-size:0.82em; color:var(--col-text-muted);">Vibrant</span>
+</div>
+</div>
+<div class="setting-item" style="border-top:1px solid var(--col-border-light); padding-top:20px; display:none;">
+<span class="setting-item-label">Reset Theme</span>
+<button class="btn btn-secondary" style="border-color:var(--col-error); color:var(--col-error);" onclick="resetThemeToDefaults()">Reset Theme to Defaults</button>
+<p class="setting-item-desc">Resets accent color, hue shift, and dark mode.</p>
+</div>
+<div class="setting-item" style="display: none;">
+<span class="setting-item-label">Appearance</span>
+<div class="toggle-container" style="margin:0; justify-content:flex-start;">
+<span class="toggle-label">Dark</span>
+<label class="toggle-switch">
+<input type="checkbox" id="light-mode-toggle">
+<span class="toggle-slider"></span>
+</label>
+<span class="toggle-label">Light</span>
+</div>
+</div>
