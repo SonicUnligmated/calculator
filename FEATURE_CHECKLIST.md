@@ -1,5 +1,6 @@
-# Feature / effect checklist (source → extracted)
-Source: ATC Math HTML (~332 KB). Package: `/workspace/calculator-repo/`.
+# Feature / effect checklist
+
+Package: Quantifier-30 calculator (standalone demo + reusable assets).
 
 ## Verified present
 
@@ -55,12 +56,12 @@ Source: ATC Math HTML (~332 KB). Package: `/workspace/calculator-repo/`.
 
 | Status | Item | Reason |
 | --- | --- | --- |
-| FLAGGED | DOM: calcCosmicCanvas drawing loop | Canvas element exists in source HTML but NO JS ever draws to it (dead placeholder). Preserved in extract; visual transparency uses .calc-theme-overlay + updateOverlayCanvases instead. |
-| FLAGGED | JS: globalBlobs metaballs | Referenced in theme/cosmic roam but never assigned in source. Stubbed null in package. |
-| OMITTED-by-design | Quiz unlock / autoload / Tab↔answer-entry | ATC quiz host features; stubs keep calc usable standalone. Tab switching to answer-input is no-op without #answer-input. |
-| OMITTED-by-design | Cosmic roam / extra glow / SI prefixes UI | ATC Extra settings; not required for calculator+colorizer. Theme panel kept. |
-| OMITTED-by-design | Full settings About/Data/Shortcuts panels | Colorizer Theme panel extracted; other ATC settings panels not part of calculator package. |
-| PRESENT-with-stub | Particle formula text spawners | Uses demo QUESTION_GENERATORS stub (ATC generators omitted). Orbit particles + overlays still run. |
+| FLAGGED | DOM: calcCosmicCanvas drawing loop | Canvas element exists but no JS draws to it (dead placeholder). Preserved; visual transparency uses .calc-theme-overlay + updateOverlayCanvases instead. |
+| FLAGGED | JS: globalBlobs metaballs | Referenced in older theme paths but never assigned. Stubbed null in package. |
+| OMITTED-by-design | Quiz unlock / autoload / Tab↔answer-entry | Host-quiz features; stubs keep calc usable standalone. Tab switching to answer-input is no-op without #answer-input. |
+| OMITTED-by-design | Cosmic roam / extra glow / SI prefixes UI | Extra settings not required for calculator+colorizer. Theme panel kept. |
+| OMITTED-by-design | Full settings About/Data/Shortcuts panels | Colorizer Theme panel only; other settings panels not part of this package. |
+| PRESENT-with-stub | Particle formula text spawners | Uses demo QUESTION_GENERATORS stub. Orbit particles + overlays still run. |
 
 **MISSING count:** 0
 

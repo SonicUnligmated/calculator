@@ -1,13 +1,18 @@
-# Quantifier-30 Calculator (ATC Math extract)
+> This README is AI-generated.
 
-Standalone, reusable calculator package extracted from the ATC Math monolithic HTML.
-Includes the full ATC visual theme, **colorizer** (accent presets / strength / light mode),
-WebGL particle field, and **calculator canvas overlays** (`mix-blend-mode: screen`) so
-particles show through the display and solar panel with the same transparency effect.
+## Try it live (no setup)
 
-> Local package only — GitHub create/push not done yet (see “Remaining for GitHub”).
+**[Open the Quantifier-30 Calculator on GitHub Pages →](https://ancient7999.github.io/calculator/)**
 
-## Quick demo
+Skip cloning, installs, and local servers — just click the link above and use the calculator in your browser.
+
+---
+
+# Quantifier-30 Calculator
+
+Standalone, reusable Quantifier-30 calculator package with a full visual theme, **colorizer** (accent presets / strength / light mode), WebGL particle field, and **calculator canvas overlays** (`mix-blend-mode: screen`) so particles show through the display and solar panel.
+
+## Local demo (optional)
 
 ```bash
 cd calculator-repo
@@ -15,7 +20,7 @@ npm run check          # syntax smoke test
 npm start              # http://localhost:8765
 ```
 
-Open `index.html` in a browser. You should see:
+Or open `index.html` in a browser. You should see:
 
 - Floating **Quantifier-30** calculator (TI-30XS-style layout)
 - Animated wallpaper wave on the calc body
@@ -71,7 +76,7 @@ All presentation hooks are CSS custom properties in `css/theme-vars.css`:
 }
 ```
 
-**Programmatic (same API as ATC Math):**
+**Programmatic theming API:**
 
 ```js
 changeAccentColor('#8833ff', 32);
@@ -79,7 +84,7 @@ applyPreset('#ff8800', false);       // standard Amber
 applyPreset('#000000', false, 90);   // Obsidian
 ```
 
-Light mode: toggle class `light-mode` on `<html>` (or use the hidden light-mode toggle in the colorizer panel).
+Light mode: toggle class `light-mode` on `<html>` (or use the light-mode toggle in the colorizer panel).
 
 Calculator chrome (borders, button fills, wallpaper wave, scanlines, glow) reads these variables — **logic stays in `js/calculator-core.js`**.
 
@@ -87,7 +92,7 @@ Calculator chrome (borders, button fills, wallpaper wave, scanlines, glow) reads
 
 ```
 calculator-repo/
-  index.html                 # standalone demo (ATC theme + colorizer + calc)
+  index.html                 # standalone demo (theme + colorizer + calc)
   css/
     theme-vars.css           # :root tokens + light-mode map
     calculator.css           # calc widget visuals / animations / overlays
@@ -99,7 +104,7 @@ calculator-repo/
   assets/
     calculator.fragment.html
     colorizer-panel.fragment.html
-  FEATURE_CHECKLIST.md       # source → extracted verification
+  FEATURE_CHECKLIST.md       # feature verification checklist
   package.json
   README.md
 ```
@@ -109,19 +114,10 @@ calculator-repo/
 - Show/hide: `#calculator-widget` `style.display = 'block'|'none'`
 - Drag: `startDragCalc` / `startDragCalcTouch` (already on widget attributes)
 - Keyboard works while widget `display:block` and `lastInputTarget === 'calc'`
-- State persistence keys: `atc_calc_state`, `atc_calc_pos`, `atc_theme_color_v1`, `atc_accent_strength`, `atc_custom_presets`, …
-- Quiz-only helpers stubbed: `_isMobileQuiz`, formula generators (demo stubs so particles still spawn sample text)
+- State persistence keys (kept for compatibility): `atc_calc_state`, `atc_calc_pos`, `atc_theme_color_v1`, `atc_accent_strength`, `atc_custom_presets`, …
+- Host helpers stubbed for standalone use: `_isMobileQuiz`, formula generators (demo stubs so particles still spawn sample text)
 
-## Remaining for GitHub
-
-- Create repo (name TBD, e.g. `quantifier-calculator`)
-- Add LICENSE if publishing
-- Optional: ES module build / `exports` map / TypeScript types
-- Optional: CI (`npm run check` + playwright visual smoke)
-- Push initial commit; do **not** force-push over existing remotes
-- Wire ATC Math HTML to consume this package instead of inlined calc
-
-## Smoke tests run locally
+## Smoke tests
 
 - `npm run check` — JS syntax OK
 - Structural grep: required IDs/classes/canvas present in demo

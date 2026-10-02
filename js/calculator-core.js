@@ -1,4 +1,4 @@
-/* Quantifier-30 calculator core — extracted from ATC Math HTML (intact logic) */
+/* Quantifier-30 calculator core */
 (function (global) {
   'use strict';
   if (typeof global._isMobileQuiz !== 'function') {

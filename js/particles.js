@@ -1,5 +1,5 @@
 /* Particle field + calculator theme-overlay canvases (canvas transparency / mix-blend-mode:screen)
-   Extracted intact from ATC Math. Formula-text spawning needs ALL_FORMULA_TYPES + QUESTION_GENERATORS;
+   Formula-text spawning needs ALL_FORMULA_TYPES + QUESTION_GENERATORS;
    demo provides lightweight stubs so orbit particles + calc overlays still run. */
 (function (global) {
   'use strict';

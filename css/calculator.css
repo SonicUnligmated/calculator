@@ -1,4 +1,4 @@
-/* Calculator widget styles extracted from ATC Math HTML */
+/* Quantifier-30 calculator widget styles */
 .calc-body{transition:border-color 0.2s ease,box-shadow 0.2s ease;}
 #calculator-widget.calc-target-active .calc-body{border-color:var(--accent-0);box-shadow:0 12px 40px rgba(0,0,0,0.65),inset 0 1px 0 rgba(255,255,255,0.05),0 0 25px rgba(var(--accent-0-rgb),0.6);}
 .calc-toggle-btn:hover {background:rgba(var(--accent-0-rgb),0.15) !important; box-shadow:0 0 20px rgba(var(--accent-0-rgb),0.7) !important;}

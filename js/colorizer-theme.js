@@ -1,4 +1,4 @@
-/* Colorizer / theme engine extracted from ATC Math
+/* Colorizer / theme engine
  * Drives --accent-* CSS variables + light-mode + presets.
  * Consumed by calculator visuals (wallpaper wave, overlays, buttons).
  */
