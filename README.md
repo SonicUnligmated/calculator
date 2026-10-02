@@ -1,12 +1,8 @@
-> This README is AI-generated.
+This README is AI-generated.
 
-## Try it live (no setup)
+Open the Quantifier-30 Calculator interface.
 
-**[Open the Quantifier-30 Calculator on GitHub Pages →](https://ancient7999.github.io/calculator/)**
-
-Skip cloning, installs, and local servers — just click the link above and use the calculator in your browser.
-
----
+https://ancient7999.github.io/calculator/
 
 # Quantifier-30 Calculator
 
